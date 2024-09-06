@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <GridLayout
+        android:id="@+id/grid_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:padding="10dp"
+        android:rowCount="3"
+        app:layout_constraintBottom_toBottomOf="@+id/map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <SearchView
+            android:id="@+id/mapSearch"
+            android:layout_width="240dp"
+            android:layout_height="50dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_columnSpan="2"
+            android:layout_margin="10dp"
+            android:background="@drawable/custom_button"
+            android:elevation="5dp"
+            android:iconifiedByDefault="false"
+            android:queryHint="From..." />
+
+        <SearchView
+            android:id="@+id/destinationSearch"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_columnSpan="2"
+            android:layout_margin="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="117dp"
+            android:background="@drawable/custom_button_end"
+            android:iconifiedByDefault="false"
+            android:queryHint="Destination..." />
+
+        <Button
+            android:id="@+id/button_show_location"
+            android:textAllCaps="false"
+            android:layout_width="104dp"
+            android:layout_height="48dp"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:layout_margin="10dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/custom_button_center"
+            android:text="Location"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/button_go"
+            android:layout_width="104dp"
+            android:layout_height="48dp"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:layout_margin="10dp"
+            android:background="@drawable/custom_button_go"
+            android:text="Go"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@null" />
+    </GridLayout>
+
+    <ListView
+        android:id="@+id/suggestions_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/top_down_gradient_list"
+        android:visibility="gone"
+        app:layout_constraintHeight_default="wrap"
+        app:layout_constraintTop_toBottomOf="@id/grid_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:maxHeight="150dp" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
+        android:layout_width="410dp"
+        android:layout_height="66dp"
+        android:background="@drawable/background_bottom_navigation"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.979"
+        app:menu="@menu/bottom_menu" />
+
+    <GridLayout
+        android:id="@+id/grid_clear_route_add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:orientation="horizontal"
+        android:rowCount="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/map"
+        app:layout_constraintHorizontal_bias="0.227"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.878">
+
+        <Button
+            android:id="@+id/button_clear_route"
+            android:textAllCaps="false"
+            android:layout_width="90dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_button_center"
+            android:text="Clear Route"
+            android:textColor="@color/white"
+            app:backgroundTint="@null"
+            android:layout_column="0"
+            android:layout_gravity="center"
+            android:layout_row="0" />
+
+        <Button
+            android:id="@+id/add_button_main"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/custom_button_center"
+            android:text="+"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            app:backgroundTint="@null"
+            android:layout_column="1"
+            android:layout_gravity="center"
+            android:layout_row="0" />
+
+    </GridLayout>
+
+    <GridLayout
+        android:id="@+id/grid_car"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:useDefaultMargins="true"
+        android:rowCount="3"
+        android:columnCount="3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/car_grid_1"
+            android:layout_width="245dp"
+            android:layout_height="50dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_button_center"
+            android:text="NULL"
+            android:textColor="@color/white"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/car_del_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:background="@drawable/custom_button_delete"
+            android:layout_gravity="center"
+            android:paddingTop="12dp"
+            android:drawableTop="@drawable/baseline_delete_24"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/car_grid_2"
+            android:layout_width="245dp"
+            android:layout_height="50dp"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:background="@drawable/custom_button_center"
+            android:layout_gravity="center"
+            app:backgroundTint="@null"
+            android:textColor="@color/white"
+            android:text="NULL" />
+
+        <Button
+            android:id="@+id/car_del_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:background="@drawable/custom_button_delete"
+            android:layout_gravity="center"
+            android:paddingTop="12dp"
+            android:drawableTop="@drawable/baseline_delete_24"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/car_grid_3"
+            android:layout_width="245dp"
+            android:layout_height="50dp"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_button_center"
+            android:text="NULL"
+            android:textColor="@color/white"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/car_del_3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:background="@drawable/custom_button_delete"
+            android:layout_gravity="center"
+            android:paddingTop="12dp"
+            android:drawableTop="@drawable/baseline_delete_24"
+            app:backgroundTint="@null" />
+    </GridLayout>
+
+    <GridLayout
+        android:id="@+id/grid_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:useDefaultMargins="true"
+        android:rowCount="5"
+        android:columnCount="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/car_set_1"
+            android:textAllCaps="false"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_button_center"
+            android:text="Information about app"
+            android:textColor="@color/white"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/car_set_2"
+            android:textAllCaps="false"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:background="@drawable/custom_button_delete"
+            android:layout_gravity="center"
+            android:text="Tips to reduce CO2 footprint"
+            android:textColor="@color/white"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/car_set_3"
+            android:textAllCaps="false"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:background="@drawable/custom_button_center"
+            android:layout_gravity="center"
+            app:backgroundTint="@null"
+            android:text="Information about the math behind"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/car_set_4"
+            android:textAllCaps="false"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:background="@drawable/custom_button_delete"
+            android:layout_gravity="center"
+            android:text="Change map theme"
+            android:textColor="@color/white"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/car_set_5"
+            android:textAllCaps="false"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_button_center"
+            android:text="Clear all car data"
+            android:textColor="@color/white"
+            app:backgroundTint="@null" />
+    </GridLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCo2"
+        android:layout_width="300dp"
+        android:layout_height="520dp"
+        android:visibility="gone"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/header_image_co2"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/co2" />
+
+            <TextView
+                android:id="@+id/title_co2"
+                style="@style/TextAppearance.MaterialComponents.Headline3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Reduce Co2 Emissions"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header_image_co2" />
+
+            <TextView
+                android:id="@+id/body_co2"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="
+    -Use alternative transport such as catching the bus, train, tram or ferry, which are often cheaper than driving. You could also walk or cycle depending on the distance.
+    \n      -Go to shops nearest to you whenever possible to reduce the distances you travel by car. Walk or cycle to your local shops if you can.
+    \n      -Plan to do a number of errands in one trip rather than several trips to save both time and fuel.
+    \n      -Avoid peak-hour traffic whenever possible."
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_co2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardInfoApp"
+        android:layout_width="300dp"
+        android:layout_height="520dp"
+        android:visibility="gone"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/header_image_info_app"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logo_no_background" />
+
+            <TextView
+                android:id="@+id/title_info_app"
+                style="@style/TextAppearance.MaterialComponents.Headline3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Info about app"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header_image_info_app" />
+
+            <TextView
+                android:id="@+id/body_info_app"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:text="     CarbonTrack helps you calculate your vehicle's fuel consumption and CO2 emissions throughout your journey. By tracking these metrics, it raises awareness about your environmental impact and encourages more eco-friendly driving habits."
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_info_app" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardInfoMath"
+        android:layout_width="300dp"
+        android:layout_height="520dp"
+        android:visibility="gone"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/header_image_info_math"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/math" />
+
+            <TextView
+                android:id="@+id/title_info_math"
+                style="@style/TextAppearance.MaterialComponents.Headline3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Info about the math behind"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header_image_info_math" />
+
+            <TextView
+                android:id="@+id/body_info_math"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="     CarbonTrack does some simple calculus to find out how much the car you have chosen consumes as fuel and how much CO2 it produces.
+\n     (CO2 = distance * CO2 the engine produces), the value is in KG/KM
+\n     (Fuel used = distance * fuel consumption of the engine per 100 KM)"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_info_math" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardChangeTheme"
+        android:layout_width="300dp"
+        android:layout_height="520dp"
+        android:visibility="gone"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp">
+
+            <Button
+                android:id="@+id/theme1"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_button_circle"
+                android:text="Default Theme"
+                android:textColor="@color/green"
+                android:textAlignment="center"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.396" />
+
+            <Button
+                android:id="@+id/theme2"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_button_circle"
+                android:text="Dark Theme"
+                android:textColor="@color/green"
+                android:textAlignment="center"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.53" />
+
+            <Button
+                android:id="@+id/theme3"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_button_circle"
+                android:text="Retro Theme"
+                android:textColor="@color/green"
+                android:textAlignment="center"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.664" />
+
+            <Button
+                android:id="@+id/theme4"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_button_circle"
+                android:text="Google Default Theme"
+                android:textColor="@color/green"
+                android:textAlignment="center"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.794" />
+
+            <TextView
+                android:id="@+id/title_theme"
+                style="@style/TextAppearance.MaterialComponents.Headline3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="104dp"
+                android:text="Change Theme"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toTopOf="@id/theme1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardloading"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:visibility="gone"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp">
+
+            <TextView
+                android:id="@+id/text_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading Route..."
+                android:textAlignment="center"
+                android:textColor="@color/green"
+                app:layout_constraintBottom_toTopOf="@id/progressBar2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.097" />
+
+            <ProgressBar
+                android:id="@+id/progressBar2"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="28dp"
+                android:indeterminate="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/close_setting_cards"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_button_circle"
+        android:text="X"
+        android:visibility="gone"
+        android:autoSizeTextType="uniform"
+        android:textColor="@color/green"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.997"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.155" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

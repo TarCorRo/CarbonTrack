@@ -1,0 +1,16 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/decelerate_interpolator">
+
+    <!-- Animația de transparență (fade in) -->
+    <alpha
+        android:duration="1000"
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0" />
+
+    <!-- Animația de translație (slide up) -->
+    <translate
+        android:duration="1000"
+        android:fromYDelta="100%"
+        android:toYDelta="0%" />
+
+</set>
